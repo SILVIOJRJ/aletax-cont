@@ -166,20 +166,20 @@ export default function EditarClientePage() {
   ];
 
   const statusBadge = (status: string) => {
-    const map: Record<string, 'success' | 'warning' | 'danger' | 'default'> = {
+    const map: Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info' | 'purple'> = {
       ativo: 'success',
       inativo: 'danger',
       encerrado: 'danger',
       suspenso: 'warning',
-      aberta: 'info' as 'info',
+      aberta: 'info',
       em_andamento: 'warning',
       concluida: 'success',
       cancelada: 'danger',
       pendente: 'warning',
-      emitido: 'info' as 'info',
+      emitido: 'info',
       pago: 'success',
       vencido: 'danger',
-    } as Record<string, 'success' | 'warning' | 'danger' | 'default'>;
+    } as Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info' | 'purple'>;
     return <Badge variant={map[status] ?? 'default'}>{status.replace('_', ' ')}</Badge>;
   };
 

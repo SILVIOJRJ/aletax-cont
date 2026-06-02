@@ -89,7 +89,7 @@ export default function ContratosPage() {
   ];
 
   const statusBadge = (status: string) => {
-    const map: Record<string, 'success' | 'warning' | 'danger' | 'default'> = {
+    const map: Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info' | 'purple'> = {
       ativo: 'success',
       inativo: 'warning',
       encerrado: 'danger',
