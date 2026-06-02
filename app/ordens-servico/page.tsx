@@ -130,7 +130,7 @@ export default function OrdensServicoPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <SearchInput
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(value) => setSearch(value)}
             placeholder="Buscar por cliente, título ou número..."
             className="flex-1"
           />
