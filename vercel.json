@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/boletos-recorrentes",
+      "schedule": "0 8 * * *"
+    }
+  ]
+}
