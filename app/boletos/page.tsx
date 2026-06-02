@@ -170,8 +170,7 @@ export default function BoletosPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <SearchInput
             value={search}
-            onChange={(value) => setSearch(value)}
-            placeholder="Buscar por cliente..."
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}            placeholder="Buscar por cliente..."
             className="flex-1"
           />
           <Select
