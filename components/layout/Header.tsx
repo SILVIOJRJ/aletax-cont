@@ -2,7 +2,7 @@
 
 import { Menu, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseBrowser } from '@/lib/supabase';
 import { Badge } from '@/components/ui/Badge';
 
 type UserRole = 'admin' | 'funcionario';
@@ -22,7 +22,7 @@ export function Header({ userName, userRole, onMenuClick }: HeaderProps) {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await getSupabaseBrowser().auth.signOut();
     router.push('/login');
   };
 
