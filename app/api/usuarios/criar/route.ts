@@ -19,21 +19,23 @@ export async function POST(request: NextRequest) {
 
     const supabase = await createAdminClient();
 
-    // Verify the caller is an admin by checking the Authorization header session
+    // Require a valid admin session — reject if header is missing or caller is not admin
     const authHeader = request.headers.get('Authorization');
-    if (authHeader) {
-      const token = authHeader.replace('Bearer ', '');
-      const { data: { user: callerUser } } = await supabase.auth.getUser(token);
-      if (callerUser) {
-        const { data: callerProfile } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('user_id', callerUser.id)
-          .single();
-        if (callerProfile && callerProfile.role !== 'admin') {
-          return NextResponse.json({ error: 'Acesso negado: apenas admins podem criar usuários' }, { status: 403 });
-        }
-      }
+    if (!authHeader) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
+    }
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user: callerUser } } = await supabase.auth.getUser(token);
+    if (!callerUser) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
+    }
+    const { data: callerProfile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('user_id', callerUser.id)
+      .single();
+    if (!callerProfile || callerProfile.role !== 'admin') {
+      return NextResponse.json({ error: 'Acesso negado: apenas admins podem criar usuários' }, { status: 403 });
     }
 
     // Create the auth user with service role
