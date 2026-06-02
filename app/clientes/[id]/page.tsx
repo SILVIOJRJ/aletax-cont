@@ -179,7 +179,7 @@ export default function EditarClientePage() {
       emitido: 'info',
       pago: 'success',
       vencido: 'danger',
-    } as Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info' | 'purple'>;
+    } satisfies Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info'>;
     return <Badge variant={map[status] ?? 'default'}>{status.replace('_', ' ')}</Badge>;
   };
 
