@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, Save, Plus, X } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
@@ -26,7 +26,7 @@ const statusOptions = [
   { value: 'encerrado', label: 'Encerrado' },
 ];
 
-export default function NovoContratoPage() {
+function NovoContratoForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const prefilledClienteId = searchParams.get('cliente_id') ?? '';
@@ -363,5 +363,13 @@ export default function NovoContratoPage() {
         </div>
       </form>
     </AppLayout>
+  );
+}
+
+export default function NovoContratoPage() {
+  return (
+    <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-4 border-[#8B3FD4] border-t-transparent" /></div>}>
+      <NovoContratoForm />
+    </Suspense>
   );
 }
