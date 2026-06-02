@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     // Fetch contrato with cliente relation
     const { data: contrato, error: contratoError } = await supabase

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'nome, email e password são obrigatórios' }, { status: 400 });
     }
 
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     // Verify the caller is an admin by checking the Authorization header session
     const authHeader = request.headers.get('Authorization');

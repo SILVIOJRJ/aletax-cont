@@ -1,8 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export function createClient() {
-  const cookieStore = cookies();
+export async function createClient() {
+  const cookieStore = await cookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,14 +12,13 @@ export function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2])
             );
           } catch {
-            // setAll can be called from a Server Component where cookies are read-only.
-            // This is safe to ignore if middleware is refreshing the session.
+            // setAll called from Server Component — read-only context, safe to ignore.
           }
         },
       },
@@ -27,12 +26,8 @@ export function createClient() {
   );
 }
 
-/**
- * Server client using the service role key — bypasses RLS.
- * Only use in trusted server-side contexts (e.g. cron jobs, admin operations).
- */
-export function createAdminClient() {
-  const cookieStore = cookies();
+export async function createAdminClient() {
+  const cookieStore = await cookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -42,10 +37,10 @@ export function createAdminClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2])
             );
           } catch {
             // Read-only context — safe to ignore.

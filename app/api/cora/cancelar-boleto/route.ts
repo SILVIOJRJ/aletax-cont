@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     const { data: boleto, error: fetchError } = await supabase
       .from("boletos")

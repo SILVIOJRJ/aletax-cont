@@ -426,7 +426,7 @@ export default function EditarClientePage() {
                       <Th>Valor Mensal</Th>
                       <Th>Início</Th>
                       <Th>Status</Th>
-                      <Th></Th>
+                      <Th>{' '}</Th>
                     </tr>
                   </Thead>
                   <Tbody>

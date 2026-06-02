@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     // Fetch all recurring OS that are active and should generate boletos
     const { data: ordens, error: osError } = await supabase

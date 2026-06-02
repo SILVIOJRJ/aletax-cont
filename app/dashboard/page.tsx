@@ -68,7 +68,7 @@ function boletoStatusLabel(status: BoletoStatus) {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function DashboardPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Build "today" and "today + 7 days" as ISO date strings
   const today = new Date();
@@ -140,8 +140,8 @@ export default async function DashboardPage() {
     0
   );
 
-  const ultimasOS = (ultimasOSResult.data ?? []) as OSRow[];
-  const proximosVencimentos = (proximosVencimentosResult.data ?? []) as BoletoRow[];
+  const ultimasOS = (ultimasOSResult.data ?? []) as unknown as OSRow[];
+  const proximosVencimentos = (proximosVencimentosResult.data ?? []) as unknown as BoletoRow[];
 
   // ── Render ────────────────────────────────────────────────────────────────────
   return (

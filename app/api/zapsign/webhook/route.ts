@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     // Find the contrato associated with this ZapSign document
     const { data: contrato, error: findError } = await supabase

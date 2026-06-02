@@ -19,7 +19,7 @@ type RequestBody = RequestBodyWithOS | RequestBodyManual;
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as RequestBody;
-    const supabase = createAdminClient();
+    const supabase = await createAdminClient();
 
     let ordemServicoId: string | null = null;
     let clienteId: string;
