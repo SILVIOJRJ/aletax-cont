@@ -166,7 +166,7 @@ export default function EditarClientePage() {
   ];
 
   const statusBadge = (status: string) => {
-    const map: Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info' | 'purple'> = {
+    const map: Record<string, 'success' | 'warning' | 'danger' | 'default' | 'info'> = {
       ativo: 'success',
       inativo: 'danger',
       encerrado: 'danger',
